@@ -270,32 +270,15 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-def display():
-    return {"_display_type": "stats", "stats": [("Streamlit App", "Creado")]}
 
-# --- Execute display() ---
-"""Serializes and outputs the result of display() for the Plotly Studio runtime."""
+# Footer final del dashboard
+st.markdown("---")
 
-import json
-import traceback
-
-from utils.display_util import _dumps, _serialize_result  # type: ignore[import-not-found]
-
-if __name__ == "__main__":
-    try:
-        if "display" in dir():
-            _result = display()  # type: ignore[name-defined]  # noqa: F821 - defined in user code
-        else:
-            # Fallback for data modules that define classes/functions but no display().
-            # Just report success so the step doesn't error out.
-            _result = {
-                "_display_type": "stats",
-                "stats": [("Status", "Module loaded successfully")],
-            }
-        _serialized = _serialize_result(_result)
-        _json_str = _dumps(_serialized)
-    except Exception as _display_err:
-        _json_str = json.dumps({"type": "error", "value": traceback.format_exc()})
-    print("__RESULT_START__")
-    print(_json_str)
-    print("__RESULT_END__")
+st.markdown(
+    """
+    <p style='text-align:center; color:gray;'>
+    Dashboard de Análisis de Matrícula de Pregrado en Bogotá, 2024
+    </p>
+    """,
+    unsafe_allow_html=True
+)
